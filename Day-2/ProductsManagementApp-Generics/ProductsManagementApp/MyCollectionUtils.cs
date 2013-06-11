@@ -5,6 +5,53 @@ namespace ProductsManagementApp
 {
     public static class MyCollectionUtils
     {
+        public static IEnumerable<TResult> Join<T1, T2, TKey, TResult>(this IEnumerable<T1> list,
+                                                                       IEnumerable<T2> joinList,
+                                                                       Func<T1, TKey> sourceKeySelector,
+                                                                       Func<T2, TKey> joinKeySelector,
+                                                                       Func<T1, T2, TResult> joinOperation) where TKey : IComparable
+        {
+            foreach (var item in list)
+            {
+                var sourceKey = sourceKeySelector(item);
+                foreach (var joinItem in joinList)
+                {
+                    var joinKey = joinKeySelector(joinItem);
+                    if (sourceKey.CompareTo(joinKey) == 0)
+                        yield return joinOperation(item, joinItem);
+                }
+            }
+        } 
+
+        public static Dictionary<TKey, IList<T>> GroupBy<T, TKey>(this IEnumerable<T> list,
+                                                                         Func<T, TKey> keySelector)
+        {
+            var result = new Dictionary<TKey, IList<T>>();
+            foreach (var item in list)
+            {
+                var itemKey = keySelector(item);
+                if (!result.ContainsKey(itemKey))
+                    result.Add(itemKey, new List<T>());
+                result[itemKey].Add(item);
+            }
+            return result;
+        } 
+        public static bool Contains<T>(this IEnumerable<T> list, T obj)
+        {
+            foreach (var item in list)
+            {
+                if (item.Equals(obj)) return true;
+            }
+            return false;
+        }
+        public static bool Contains<T>(this IEnumerable<T> list, T obj, IEqualityComparer<T> comparer )
+        {
+            foreach (var item in list)
+            {
+                if (comparer.Equals(item,obj)) return true;
+            }
+            return false;
+        }
         public static void ForEach<T>(this IEnumerable<T> list, Action<T> action)
         {
             foreach (var item in list)

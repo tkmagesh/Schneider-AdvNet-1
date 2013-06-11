@@ -41,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
     <Compile Include="CheapProductSearchCriteria.cs" />
     <Compile Include="CompareProductDelegate.cs" />
     <Compile Include="CostlyProductSearchCriteria.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="FormatAttribute.cs" />
+    <Compile Include="IdEqualityComparer.cs" />
     <Compile Include="IFormat.cs" />
     <Compile Include="IHaveId.cs" />
     <Compile Include="InverseCriteria.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="MyCollectionUtils.cs" />
     <Compile Include="MyUtilities.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductCategoryViewModel.cs" />
     <Compile Include="ProductComparerByCost.cs" />
     <Compile Include="ProductComparerByUnits.cs" />
     <Compile Include="ProductCriteriaDelegate.cs" />

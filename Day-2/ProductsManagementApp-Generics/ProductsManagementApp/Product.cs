@@ -13,6 +13,10 @@
 
         [Format(true,4)]
         public decimal Cost { get; set; }
+
+        [Format(true, 5)]
+        public int CategoryId { get; set; }
+
         public override string ToString()
         {
             return this.Format("\t");
